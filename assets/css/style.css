@@ -1,0 +1,9 @@
+body {
+	background-image: url(../images/lotr.png);
+	min-height: 680px;
+	background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
