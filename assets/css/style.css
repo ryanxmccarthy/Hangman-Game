@@ -4,6 +4,11 @@ body {
 	background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: lotrFont;
     color: white;
 }
 
+@font-face {
+    font-family: lotrFont;
+    src: url(../fonts/lotr.ttf);
+}
