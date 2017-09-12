@@ -2,7 +2,7 @@
 // if it is, inject that letter into the empty array
 
 //declare all variables
-var words = ['Legolas', 'Gimli', 'Aragorn', 'Sauron', 'Rivendell', 'Glamdring', 'Anduril', 'Frodo', 'Nazgul', 'Mordor', 'Narsil', 'Gollum', 'Bombadil', 'Samwise', 'Manwe', 'Greyhame', 'Stormcrow', 'Valar', 'Maiar']
+var words = ['LEGOLAS', 'GIMLI', 'ARAGORN', 'SAURON', 'RIVENDELL', 'GLAMDRING', 'ANDURIL', 'FRODO', 'NAZGUL', 'MORDOR', 'NARSIL', 'GOLLUM', 'BOMBADIL', 'SAMWISE', 'MANWE', 'GREYHAME', 'STORMCROW', 'VALAR', 'MAIAR']
 var randomWord = words[Math.floor(Math.random() * words.length)];
 var hiddenWord = [];
 var lettersGuessed = [];
@@ -43,7 +43,7 @@ var reset = function() {
 document.onkeyup = function(event) {
 	guessesLeft--;
 	updateGuessesLeft();
-	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+	var userGuess = String.fromCharCode(event.keyCode).toUpperCase();
 	if (randomWord.indexOf(userGuess) === -1) {
 		lettersGuessed.push(userGuess);
 		addLettersGuessed();
