@@ -8,6 +8,10 @@ body {
     color: white;
 }
 
+#hiddenword {
+	font-size: 100px;
+}
+
 @font-face {
     font-family: lotrFont;
     src: url(../fonts/lotr.ttf);

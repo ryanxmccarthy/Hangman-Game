@@ -1,52 +1,63 @@
-// use indexOf to see if the guessed letter is anywhere in the array
-// if it is, inject that letter into the empty array
-
 //declare all variables
 var words = ['LEGOLAS', 'GIMLI', 'ARAGORN', 'SAURON', 'RIVENDELL', 'GLAMDRING', 'ANDURIL', 'FRODO', 'NAZGUL', 'MORDOR', 'NARSIL', 'GOLLUM', 'BOMBADIL', 'SAMWISE', 'MANWE', 'GREYHAME', 'STORMCROW', 'VALAR', 'MAIAR']
-var randomWord = words[Math.floor(Math.random() * words.length)];
-var hiddenWord = [];
-var lettersGuessed = [];
-var guessesLeft = 10;
+// var randomWord = words[Math.floor(Math.random() * words.length)];
+// var hiddenWord = [];
+// var lettersGuessed = [];
+// var guessesLeft = 10;
+var randomWord = reset();
 
-console.log(randomWord);
-
-//define functions
-for(var i = 0; i < randomWord.length; i++) {
-	document.getElementById("hiddenWord").innerHTML = "";
-	hiddenWord.push("_ ");
-	}
-
-document.getElementById("hiddenWord").innerHTML = hiddenWord;
-
-var addLettersGuessed = function() {  
+//define all functions
+function addLettersGuessed() {  
 	document.getElementById('lettersGuessed').innerHTML = lettersGuessed.join(', ');
 }
-var updateLettersGuessed = function() {
+function updateLettersGuessed() {
 	document.getElementById('lettersGuessed').innerHTML = lettersGuessed;
 }
-var updateGuessesLeft = function() {
+function updateGuessesLeft() {
 	document.getElementById('guessesLeft').innerHTML = guessesLeft;
 }
-var newWord = function() {
+function newWord() {
 	var randomWord = words[Math.floor(Math.random() * words.length)];
-	document.getElementById("randomWord").innerHTML = randomWord;
+	return randomWord;
 }
-var reset = function() {
+function hideWord(randomWord) {
+	for(var i = 0; i < randomWord.length; i++) {
+		var newSpan = document.createElement("SPAN");
+		newSpan.setAttribute('id', 'letter' + i);
+		newSpan.innerHTML = "_ ";
+		document.getElementById("hiddenWord").appendChild(newSpan);
+	}
+}	
+function reset() {
 	guessesLeft = 10;
 	lettersGuessed = [];
-	updateLettersGuessed();
 	updateGuessesLeft();
-	newWord();
+	updateLettersGuessed();
+	var newWordReturn = newWord();
+	console.log(newWordReturn);
+	document.getElementById("hiddenWord").innerHTML = "";
+	hideWord(newWordReturn);
+	return newWordReturn;
 }
 
 //runs when user makes a guess
 document.onkeyup = function(event) {
-	guessesLeft--;
-	updateGuessesLeft();
+	console.log(event.charCode);
 	var userGuess = String.fromCharCode(event.keyCode).toUpperCase();
 	if (randomWord.indexOf(userGuess) === -1) {
-		lettersGuessed.push(userGuess);
-		addLettersGuessed();
+		if (event.keyCode > 64 && event.keyCode < 91) {
+			lettersGuessed.push(userGuess);
+			addLettersGuessed();
+			guessesLeft--;
+			updateGuessesLeft();
+		}
+	} else {
+		// document.getElementById("letter" + randomWord.indexOf(userGuess)).innerHTML = userGuess;
+		for(var i = 0; i < randomWord.length; i++) {
+			if (randomWord.charAt(i) === userGuess) {
+				document.getElementById("letter" + i).innerHTML = userGuess;
+			}
+		}
 	}
 
 	if (guessesLeft == 0) {
