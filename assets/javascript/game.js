@@ -1,9 +1,5 @@
 //declare all variables
 var words = ['LEGOLAS', 'GIMLI', 'ARAGORN', 'SAURON', 'RIVENDELL', 'GLAMDRING', 'ANDURIL', 'FRODO', 'NAZGUL', 'MORDOR', 'NARSIL', 'GOLLUM', 'BOMBADIL', 'SAMWISE', 'MANWE', 'GREYHAME', 'STORMCROW', 'VALAR', 'MAIAR']
-// var randomWord = words[Math.floor(Math.random() * words.length)];
-// var hiddenWord = [];
-// var lettersGuessed = [];
-// var guessesLeft = 10;
 var randomWord = reset();
 
 //define all functions
@@ -12,6 +8,7 @@ function addLettersGuessed() {
 }
 function updateLettersGuessed() {
 	document.getElementById('lettersGuessed').innerHTML = lettersGuessed;
+	return lettersGuessed;
 }
 function updateGuessesLeft() {
 	document.getElementById('guessesLeft').innerHTML = guessesLeft;
@@ -34,7 +31,6 @@ function reset() {
 	updateGuessesLeft();
 	updateLettersGuessed();
 	var newWordReturn = newWord();
-	console.log(newWordReturn);
 	document.getElementById("hiddenWord").innerHTML = "";
 	hideWord(newWordReturn);
 	return newWordReturn;
@@ -42,26 +38,28 @@ function reset() {
 
 //runs when user makes a guess
 document.onkeyup = function(event) {
-	console.log(event.charCode);
 	var userGuess = String.fromCharCode(event.keyCode).toUpperCase();
-	if (randomWord.indexOf(userGuess) === -1) {
-		if (event.keyCode > 64 && event.keyCode < 91) {
+	if (event.keyCode > 64 && event.keyCode < 91) {
+		if (lettersGuessed.indexOf(userGuess) != -1) {
+			alert("Your love of the halflings' leaf has clearly slowed your mind. You already guessed that letter.");
+		} else if (randomWord.indexOf(userGuess) === -1) {
 			lettersGuessed.push(userGuess);
 			addLettersGuessed();
 			guessesLeft--;
 			updateGuessesLeft();
-		}
-	} else {
-		// document.getElementById("letter" + randomWord.indexOf(userGuess)).innerHTML = userGuess;
-		for(var i = 0; i < randomWord.length; i++) {
-			if (randomWord.charAt(i) === userGuess) {
-				document.getElementById("letter" + i).innerHTML = userGuess;
+		} else {
+			for(var i = 0; i < randomWord.length; i++) {
+				if (randomWord.charAt(i) === userGuess) {
+					document.getElementById("letter" + i).innerHTML = userGuess;
+				}
 			}
 		}
 	}
 
-	if (guessesLeft == 0) {
-        alert("You did not pass");
+	// if (guessesLeft > 0)
+
+	if (guessesLeft === 0) {
+        alert("You shall not pass");
         reset();
     }
-}
+		}
