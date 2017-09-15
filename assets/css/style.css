@@ -8,6 +8,15 @@ body {
     color: white;
 }
 
+h3 {
+    color: gray;
+}
+
+.btn {
+    color: black;
+    background-color: gray;
+}
+
 #hiddenword {
 	font-size: 100px;
 }

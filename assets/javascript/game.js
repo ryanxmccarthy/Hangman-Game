@@ -30,10 +30,10 @@ function reset() {
 	lettersGuessed = [];
 	updateGuessesLeft();
 	updateLettersGuessed();
-	var newWordReturn = newWord();
+	var resetWord = newWord();
 	document.getElementById("hiddenWord").innerHTML = "";
-	hideWord(newWordReturn);
-	return newWordReturn;
+	hideWord(resetWord);
+	return resetWord;
 }
 
 //runs when user makes a guess
@@ -41,7 +41,7 @@ document.onkeyup = function(event) {
 	var userGuess = String.fromCharCode(event.keyCode).toUpperCase();
 	if (event.keyCode > 64 && event.keyCode < 91) {
 		if (lettersGuessed.indexOf(userGuess) != -1) {
-			alert("Your love of the halflings' leaf has clearly slowed your mind. You already guessed that letter.");
+			alert("Your love of the halflings' leaf has clearly slowed your mind.");
 		} else if (randomWord.indexOf(userGuess) === -1) {
 			lettersGuessed.push(userGuess);
 			addLettersGuessed();
@@ -56,10 +56,8 @@ document.onkeyup = function(event) {
 		}
 	}
 
-	// if (guessesLeft > 0)
-
 	if (guessesLeft === 0) {
         alert("You shall not pass");
         reset();
     }
-		}
+}
