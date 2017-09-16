@@ -14,6 +14,9 @@ function updateLettersGuessed() {
 function updateGuessesLeft() {
 	document.getElementById('guessesLeft').innerHTML = guessesLeft;
 }
+function updateCorrectLetters() {
+	var correctLetters = [];
+}
 function newWord() {
 	var randomWord = words[Math.floor(Math.random() * words.length)];
 	return randomWord;
@@ -29,6 +32,8 @@ function hideWord(randomWord) {
 function reset() {
 	guessesLeft = 10;
 	lettersGuessed = [];
+	correctLetters = [];
+	updateCorrectLetters();
 	updateGuessesLeft();
 	updateLettersGuessed();
 	var resetWord = newWord();
@@ -51,26 +56,21 @@ document.onkeyup = function(event) {
 		} else {
 			for(var i = 0; i < randomWord.length; i++) {
 				if (randomWord.charAt(i) === userGuess) {
+					var correctLetters = [];
 					document.getElementById("letter" + i).innerHTML = userGuess;
 					correctLetters.push(userGuess);
-					console.log(correctLetters);
-				}
+					// return correctLetters;
+				}	
 			}
 		}
 	}
-
+	// runs when user successfully guesses the word
+	// if (correctLetters.length === randomWord.length) {
+	// 	alert("You win!");
+	// 	location.reload();
+	// }
 	if (guessesLeft === 0) {
-        alert("You shall not pass");
+        alert("You shall not pass!");
         reset();
     }
 }
-
-//runs when user successfully guesses the word
-// for(var i = 0; i < randomWord.length; i++) {
-// 	var str = document.getElementById("hiddenWord").innerHTML;
-// 	console.log(str)
-// 	var underscore = str.includes("_");
-// 	if (underscore = false) {
-// 		alert("You win!");
-// 	}	
-// }
