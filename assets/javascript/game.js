@@ -1,6 +1,7 @@
 //declare all variables
 var words = ['LEGOLAS', 'GIMLI', 'ARAGORN', 'SAURON', 'RIVENDELL', 'GLAMDRING', 'ANDURIL', 'FRODO', 'NAZGUL', 'MORDOR', 'NARSIL', 'GOLLUM', 'BOMBADIL', 'SAMWISE', 'MANWE', 'GREYHAME', 'STORMCROW', 'VALAR', 'MAIAR']
 var randomWord = reset();
+var correctLetters = [];
 
 //define all functions
 function addLettersGuessed() {  
@@ -51,6 +52,8 @@ document.onkeyup = function(event) {
 			for(var i = 0; i < randomWord.length; i++) {
 				if (randomWord.charAt(i) === userGuess) {
 					document.getElementById("letter" + i).innerHTML = userGuess;
+					correctLetters.push(userGuess);
+					console.log(correctLetters);
 				}
 			}
 		}
@@ -61,3 +64,13 @@ document.onkeyup = function(event) {
         reset();
     }
 }
+
+//runs when user successfully guesses the word
+// for(var i = 0; i < randomWord.length; i++) {
+// 	var str = document.getElementById("hiddenWord").innerHTML;
+// 	console.log(str)
+// 	var underscore = str.includes("_");
+// 	if (underscore = false) {
+// 		alert("You win!");
+// 	}	
+// }
